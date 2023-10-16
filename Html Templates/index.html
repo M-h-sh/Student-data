@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Scores</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Student Scores</h1>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Test 1</th>
+                    <th>Test 2</th>
+                    <th>Test 3</th>
+                    <th>Test 4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                include "extract.php";
+                include "connection.php";
+                include "read.php";
+                // Retrieve student scores from the database
+                $sql = "SELECT * FROM tests";
+                $result = $conn->query($sql);
+
+                // Display student scores in a table
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row['name'] . "</td>";
+                    echo "<td>" . $row['Test_1'] . "</td>";
+                    echo "<td>" . $row['Test_2'] . "</td>";
+                    echo "<td>" . $row['Test_3'] . "</td>";
+                    echo "<td>" . $row['Test_4'] . "</td>";
+                    echo "</tr>";
+                }
+                $conn->close();
+                // Close the database connection
+                ?>
+            </tbody>
+        
+        <?php
+        // Include code to calculate and display averages (Step 3)
+        include "calculate.php";
+        ?>
+    </table>
+    </div>
+
+   
+
+    <!-- Add Bootstrap JS and Popper.js (optional) -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
